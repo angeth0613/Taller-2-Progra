@@ -1,4 +1,7 @@
-package co.edu.uptc.model;
+package co.edu.uptc.clinica.domain;
+
+
+
 
 public class MedicalAppoinmet {
     private int idMedicalAppointment;

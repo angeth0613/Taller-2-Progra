@@ -1,4 +1,4 @@
-package co.edu.uptc.enums;
+package co.edu.uptc.clinica.enums;
 
 public enum IdentificationType {
     CC("Cédula de ciudadanía"),

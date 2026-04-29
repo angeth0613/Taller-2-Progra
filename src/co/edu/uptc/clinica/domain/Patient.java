@@ -1,7 +1,7 @@
-package co.edu.uptc.model;
+package co.edu.uptc.clinica.domain;
 
-import co.edu.uptc.enums.IdentificationType;
-import co.edu.uptc.enums.Priority;
+import co.edu.uptc.clinica.enums.IdentificationType;
+import co.edu.uptc.clinica.enums.Priority;
 
 public class Patient {
     protected IdentificationType identificationType;

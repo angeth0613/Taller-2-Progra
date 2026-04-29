@@ -1,4 +1,5 @@
-package co.edu.uptc.enums;
+package co.edu.uptc.clinica.enums;
+
 
 public enum Priority {
 	LOW(0),

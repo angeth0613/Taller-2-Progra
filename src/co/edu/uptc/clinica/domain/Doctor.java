@@ -1,6 +1,6 @@
-package co.edu.uptc.model;
+package co.edu.uptc.clinica.domain;
 
-import co.edu.uptc.enums.IdentificationType;
+import co.edu.uptc.clinica.enums.IdentificationType;
 
 public class Doctor {
     private IdentificationType identificationType;
