@@ -40,8 +40,8 @@ public class PatientService {
 	}
 
 	
-	public boolean existsById(Long idPatient) {
-		return !Objects.isNull(patientRepository.findById(idPatient));
+	public boolean existsById(int i) {
+		return !Objects.isNull(patientRepository.findById(i));
 	}
 
 	

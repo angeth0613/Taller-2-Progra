@@ -1,10 +1,7 @@
 package co.edu.uptc.clinica.repository;
-
 import co.edu.uptc.clinica.domain.MedicalAppoinmet;
-
 import java.util.HashSet;
 import java.util.Set;
-
 
 public class MedicalAppoinmetRepository {
 
@@ -26,7 +23,7 @@ public class MedicalAppoinmetRepository {
 	}
 
 	
-	public MedicalAppoinmet findById(Long idAppoinmet) {
+	public MedicalAppoinmet findById(int idAppoinmet) {
 		return this.appoinmets.stream()
 				.filter(a -> a.getIdMedicalAppoinmet().equals(idAppoinmet))
 				.findFirst().orElse(null);

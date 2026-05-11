@@ -1,7 +1,5 @@
 package co.edu.uptc.clinica.repository;
-
 import co.edu.uptc.clinica.domain.Patient;
-
 import java.util.HashSet;
 import java.util.Set;
 
