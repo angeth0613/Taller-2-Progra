@@ -1,8 +1,8 @@
 package co.edu.uptc.clinica.service;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
+
+import javax.swing.JOptionPane;
 
 import co.edu.uptc.clinica.domain.Doctor;
 import co.edu.uptc.clinica.domain.MedicalAppoinmet;
@@ -17,37 +17,90 @@ public class MedicalAppoinmetService {
 
     private DoctorService doctorService;
 
-    public MedicalAppoinmetService(PatientService patientService,
-                                   DoctorService doctorService) {
+    public MedicalAppoinmetService(
+            PatientService patientService,
+            DoctorService doctorService) {
 
-        this.patientService = patientService;
-        this.doctorService = doctorService;
+        this.patientService =
+                patientService;
 
-        this.appoinmetRepository =
+        this.doctorService =
+                doctorService;
+
+        appoinmetRepository =
                 new MedicalAppoinmetRepository();
     }
 
-    public boolean addAppoinmet(int idAppoinmet,
-                                String time,
-                                int idPatient,
-                                int idDoctor) {
+    public String registerAppoinmet() {
 
-        if (appoinmetRepository.findById(idAppoinmet) != null) {
-            return false;
+        String idInput =
+                JOptionPane.showInputDialog(
+                        "Ingrese ID de la cita"
+                );
+
+        if (!isNumeric(idInput)) {
+
+            return "El ID debe ser numérico";
         }
+
+        int idAppoinmet =
+                Integer.parseInt(idInput);
+
+        if (appoinmetRepository.findById(idAppoinmet)
+                != null) {
+
+            return "La cita ya existe";
+        }
+
+        String time =
+                JOptionPane.showInputDialog(
+                        "Ingrese hora"
+                );
+
+        String patientInput =
+                JOptionPane.showInputDialog(
+                        "Ingrese ID del paciente"
+                );
+
+        if (!isNumeric(patientInput)) {
+
+            return "El ID del paciente debe ser numérico";
+        }
+
+        int idPatient =
+                Integer.parseInt(patientInput);
 
         Patient patient =
-                patientService.findById(idPatient);
+                patientService.findById(
+                        idPatient
+                );
 
         if (patient == null) {
-            return false;
+
+            return "Paciente no encontrado";
         }
 
+        String doctorInput =
+                JOptionPane.showInputDialog(
+                        "Ingrese ID del médico"
+                );
+
+        if (!isNumeric(doctorInput)) {
+
+            return "El ID del médico debe ser numérico";
+        }
+
+        int idDoctor =
+                Integer.parseInt(doctorInput);
+
         Doctor doctor =
-                doctorService.findById(idDoctor);
+                doctorService.findById(
+                        idDoctor
+                );
 
         if (doctor == null) {
-            return false;
+
+            return "Médico no encontrado";
         }
 
         MedicalAppoinmet appoinmet =
@@ -58,8 +111,17 @@ public class MedicalAppoinmetService {
                         doctor
                 );
 
-        return appoinmetRepository
-                .addAppoinmet(appoinmet);
+        boolean result =
+                appoinmetRepository.addAppoinmet(
+                        appoinmet
+                );
+
+        if (result) {
+
+            return "Cita registrada";
+        }
+
+        return "Error al registrar cita";
     }
 
     public ArrayList<MedicalAppoinmet> findAll() {
@@ -67,23 +129,56 @@ public class MedicalAppoinmetService {
         return appoinmetRepository.findAll();
     }
 
-    public ArrayList<MedicalAppoinmet> getAttentionQueue() {
+    public String showAttentionQueue() {
 
-        ArrayList<MedicalAppoinmet> appointments =
+        ArrayList<MedicalAppoinmet> list =
                 appoinmetRepository.findAll();
 
-        Collections.sort(appointments,
-                new Comparator<MedicalAppoinmet>() {
+        if (list.isEmpty()) {
 
-            @Override
-            public int compare(MedicalAppoinmet a1,
-                               MedicalAppoinmet a2) {
+            return "No hay citas registradas";
+        }
 
-                return a1.getTimeAppoinmet()
-                        .compareTo(a2.getTimeAppoinmet());
+        String message = "";
+
+        for (MedicalAppoinmet appoinmet : list) {
+
+            message +=
+                    "Hora: "
+                    + appoinmet.getTimeAppoinmet()
+
+                    + " | Paciente: "
+
+                    + appoinmet.getPatient()
+                    .getFirstName()
+
+                    + " | Médico: "
+
+                    + appoinmet.getDoctor()
+                    .getFirstName()
+
+                    + "\n";
+        }
+
+        return message;
+    }
+
+    public boolean isNumeric(String text) {
+
+        if (text == null || text.isEmpty()) {
+
+            return false;
+        }
+
+        for (int i = 0; i < text.length(); i++) {
+
+            if (!Character.isDigit(
+                    text.charAt(i))) {
+
+                return false;
             }
-        });
+        }
 
-        return appointments;
+        return true;
     }
 }

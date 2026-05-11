@@ -1,10 +1,12 @@
 package co.edu.uptc.clinica.service;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
+
+import javax.swing.JOptionPane;
 
 import co.edu.uptc.clinica.domain.Patient;
+import co.edu.uptc.clinica.enums.IdentificationTypeEnum;
+import co.edu.uptc.clinica.enums.PriorityEnum;
 import co.edu.uptc.clinica.repository.PatientRepository;
 
 public class PatientService {
@@ -12,58 +14,235 @@ public class PatientService {
     private PatientRepository patientRepository;
 
     public PatientService() {
-        patientRepository = new PatientRepository();
+
+        patientRepository =
+                new PatientRepository();
     }
 
-    public boolean addPatient(Patient patient) {
+    public String registerPatient() {
 
-        if (patientRepository.findById(patient.getIdPatient()) != null) {
-            return false;
+        IdentificationTypeEnum[] types =
+                IdentificationTypeEnum.values();
+
+        String[] options =
+                new String[types.length];
+
+        for (int i = 0; i < types.length; i++) {
+
+            options[i] = types[i].name();
         }
 
-        if (patientRepository.findByEmail(patient.getEmail()) != null) {
-            return false;
+        int typeOption =
+                JOptionPane.showOptionDialog(
+                        null,
+                        "Seleccione identificación",
+                        "Identificación",
+                        JOptionPane.DEFAULT_OPTION,
+                        JOptionPane.PLAIN_MESSAGE,
+                        null,
+                        options,
+                        options[0]
+                );
+
+        if (typeOption == -1) {
+
+            return "Operación cancelada";
         }
 
-        return patientRepository.addPatient(patient);
+        IdentificationTypeEnum idType =
+                types[typeOption];
+
+        String idInput =
+                JOptionPane.showInputDialog(
+                        "Ingrese ID del paciente"
+                );
+
+        if (!isNumeric(idInput)) {
+
+            return "El ID debe ser numérico";
+        }
+
+        int idPatient =
+                Integer.parseInt(idInput);
+
+        if (existsById(idPatient)) {
+
+            return "El paciente ya existe";
+        }
+
+        String firstName =
+                JOptionPane.showInputDialog(
+                        "Ingrese nombre"
+                );
+
+        String lastName =
+                JOptionPane.showInputDialog(
+                        "Ingrese apellido"
+                );
+
+        String email =
+                JOptionPane.showInputDialog(
+                        "Ingrese email"
+                );
+
+        if (existsByEmail(email)) {
+
+            return "El email ya existe";
+        }
+
+        PriorityEnum[] priorities =
+                PriorityEnum.values();
+
+        String[] priorityOptions =
+                new String[priorities.length];
+
+        for (int i = 0; i < priorities.length; i++) {
+
+            priorityOptions[i] =
+                    priorities[i].name();
+        }
+
+        int priorityOption =
+                JOptionPane.showOptionDialog(
+                        null,
+                        "Seleccione prioridad",
+                        "Prioridad",
+                        JOptionPane.DEFAULT_OPTION,
+                        JOptionPane.PLAIN_MESSAGE,
+                        null,
+                        priorityOptions,
+                        priorityOptions[0]
+                );
+
+        if (priorityOption == -1) {
+
+            return "Operación cancelada";
+        }
+
+        PriorityEnum priority =
+                priorities[priorityOption];
+
+        Patient patient =
+                new Patient(
+                        idType,
+                        idPatient,
+                        firstName,
+                        lastName,
+                        email,
+                        new ArrayList<>(),
+                        priority
+                );
+
+        boolean result =
+                patientRepository.addPatient(
+                        patient
+                );
+
+        if (result) {
+
+            return "Paciente registrado";
+        }
+
+        return "Error al registrar paciente";
     }
 
-    public ArrayList<Patient> findAll() {
-        return patientRepository.findAll();
+    public String registerMedication() {
+
+        String idInput =
+                JOptionPane.showInputDialog(
+                        "Ingrese ID del paciente"
+                );
+
+        if (!isNumeric(idInput)) {
+
+            return "El ID debe ser numérico";
+        }
+
+        int idPatient =
+                Integer.parseInt(idInput);
+
+        Patient patient =
+                patientRepository.findById(
+                        idPatient
+                );
+
+        if (patient == null) {
+
+            return "Paciente no encontrado";
+        }
+
+        String medication =
+                JOptionPane.showInputDialog(
+                        "Ingrese medicamento"
+                );
+
+        patient.getMedicationHistory()
+                .add(medication);
+
+        return "Medicamento agregado";
     }
 
-    public Patient findById(int idPatient) {
-        return patientRepository.findById(idPatient);
-    }
+    public String showAllPatients() {
 
-    public boolean addMedication(int idPatient, String medication) {
-        return patientRepository.addMedicationToPatient(idPatient, medication);
-    }
+        ArrayList<Patient> patients =
+                patientRepository.findAll();
 
-    public ArrayList<Patient> findAllOrderedByPriority() {
+        if (patients.isEmpty()) {
 
-        ArrayList<Patient> patients = patientRepository.findAll();
+            return "No hay pacientes";
+        }
 
-        Collections.sort(patients, new Comparator<Patient>() {
+        String message = "";
 
-            @Override
-            public int compare(Patient p1, Patient p2) {
+        for (Patient patient : patients) {
 
-                return p2.getPriorityEnum().getValue()
-                        - p1.getPriorityEnum().getValue();
-            }
-        });
+            message +=
+                    patient.getFirstName()
+                    + " - "
+                    + patient.getPriorityEnum()
+                    + "\n";
+        }
 
-        return patients;
-    }
-
-    public boolean existsByEmail(String email) {
-
-        return patientRepository.findByEmail(email) != null;
+        return message;
     }
 
     public boolean existsById(int idPatient) {
 
-        return patientRepository.findById(idPatient) != null;
+        return patientRepository.findById(
+                idPatient
+        ) != null;
+    }
+
+    public boolean existsByEmail(String email) {
+
+        return patientRepository.findByEmail(
+                email
+        ) != null;
+    }
+
+    public Patient findById(int idPatient) {
+
+        return patientRepository.findById(
+                idPatient
+        );
+    }
+
+    public boolean isNumeric(String text) {
+
+        if (text == null || text.isEmpty()) {
+
+            return false;
+        }
+
+        for (int i = 0; i < text.length(); i++) {
+
+            if (!Character.isDigit(
+                    text.charAt(i))) {
+
+                return false;
+            }
+        }
+
+        return true;
     }
 }
