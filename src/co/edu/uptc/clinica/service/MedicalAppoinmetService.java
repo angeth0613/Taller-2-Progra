@@ -1,9 +1,6 @@
 package co.edu.uptc.clinica.service;
-
 import java.util.ArrayList;
-
 import javax.swing.JOptionPane;
-
 import co.edu.uptc.clinica.domain.Doctor;
 import co.edu.uptc.clinica.domain.MedicalAppoinmet;
 import co.edu.uptc.clinica.domain.Patient;
@@ -16,6 +13,7 @@ public class MedicalAppoinmetService {
     private PatientService patientService;
 
     private DoctorService doctorService;
+    
 
     public MedicalAppoinmetService(
             PatientService patientService,
@@ -40,7 +38,9 @@ public class MedicalAppoinmetService {
 
         if (!isNumeric(idInput)) {
 
-            return "El ID debe ser numérico";
+            JOptionPane.showMessageDialog(null, "el ID debe ser numerico");
+            registerAppoinmet();
+            
         }
 
         int idAppoinmet =
