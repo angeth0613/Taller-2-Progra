@@ -1,6 +1,13 @@
 package co.edu.uptc.clinica.domain;
 
 import co.edu.uptc.clinica.enums.IdentificationTypeEnum;
+/** 
+ * <b>Descripción: </b> Representa un médico en la clínica.
+ * Contiene datos de identificación, especialidad y experiencia. <br>
+ * 
+ * @author angelica beltran
+*/
+
 
 public class Doctor {
     private IdentificationTypeEnum identificationTypeEnum;
@@ -13,6 +20,16 @@ public class Doctor {
     
     
     
+	/**
+	 * Crea un nuevo médico con los datos básicos.
+	 *
+	 * @param identificationTypeEnum tipo de identificación del médico
+	 * @param medicalId número de identificación del médico
+	 * @param firstName nombre del médico
+	 * @param lastName apellido del médico
+	 * @param specialty especialidad del médico
+	 * @param yearsOfExperience años de experiencia del médico
+	 */
 	public Doctor(IdentificationTypeEnum identificationTypeEnum, int medicalId, String firstName, String lastName,
 			String specialty, int yearsOfExperience) {
 		super();
@@ -25,62 +42,122 @@ public class Doctor {
 	}
 
 
+	/**
+	 * Devuelve el tipo de identificación del médico.
+	 *
+	 * @return tipo de identificación
+	 */
 	public IdentificationTypeEnum getIdentificationTypeEnum() {
 		return identificationTypeEnum;
 	}
 
 
+	/**
+	 * Cambia el tipo de identificación del médico.
+	 *
+	 * @param identificationTypeEnum nuevo tipo de identificación
+	 */
 	public void setIdentificationType(IdentificationTypeEnum identificationTypeEnum) {
 		this.identificationTypeEnum = identificationTypeEnum;
 	}
 
 
 
-	public int getMedicalId() {
-		return medicalId;
-	}
+    /**
+     * Devuelve el número de identificación del médico.
+     *
+     * @return id del médico
+     */
+    public int getMedicalId() {
+        return medicalId;
+    }
 
 
-	public void setMedicalId(int medicalId) {
-		this.medicalId = medicalId;
-	}
+    /**
+     * Cambia el número de identificación del médico.
+     *
+     * @param medicalId nuevo id del médico
+     */
+    public void setMedicalId(int medicalId) {
+        this.medicalId = medicalId;
+    }
 
 
-	public String getFirstName() {
-		return firstName;
-	}
+    /**
+     * Devuelve el nombre del médico.
+     *
+     * @return nombre del médico
+     */
+    public String getFirstName() {
+        return firstName;
+    }
 
 
+    /**
+     * Cambia el nombre del médico.
+     *
+     * @param firstName nuevo nombre del médico
+     */
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
 
 
-	public String getLastName() {
-		return lastName;
-	}
+/**
+     * Devuelve el apellido del médico.
+     *
+     * @return apellido del médico
+     */
+    public String getLastName() {
+        return lastName;
+    }
 
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
+    /**
+     * Cambia el apellido del médico.
+     *
+     * @param lastName nuevo apellido del médico
+     */
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
 
 
+    /**
+     * Devuelve la especialidad del médico.
+     *
+     * @return especialidad médica
+     */
 	public String getSpecialty() {
 		return specialty;
 	}
 
 
-	public void setSpecialty(String specialty) {
-		this.specialty = specialty;
-	}
+/**
+     * Cambia la especialidad del médico.
+     *
+     * @param specialty nueva especialidad médica
+     */
+    public void setSpecialty(String specialty) {
+        this.specialty = specialty;
+    }
 
 
-	public int getYearsOfExperience() {
-		return yearsOfExperience;
-	}
+    /**
+     * Devuelve los años de experiencia del médico.
+     *
+     * @return años de experiencia
+     */
+    public int getYearsOfExperience() {
+        return yearsOfExperience;
+    }
 
 
+    /**
+     * Cambia los años de experiencia del médico.
+     *
+     * @param yearsOfExperience nuevos años de experiencia
+     */
 	public void setYearsOfExperience(int yearsOfExperience) {
 		this.yearsOfExperience = yearsOfExperience;
 	}

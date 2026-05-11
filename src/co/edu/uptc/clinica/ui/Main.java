@@ -6,6 +6,10 @@ import co.edu.uptc.clinica.service.PatientService;
 
 import javax.swing.JOptionPane;
 
+/**
+ * Clase principal que muestra el menú de la clínica.
+ * Conecta la interfaz con los servicios de pacientes, médicos y citas.
+ */
 public class Main {
 
     private PatientService patientService;
@@ -24,6 +28,10 @@ public class Main {
                         doctorService);
     }
 
+    /**
+     * Muestra el menú principal de la aplicación.
+     * Permite seleccionar las acciones disponibles.
+     */
     public void showMainMenu() {
         boolean running = true;
         while (running) {
@@ -114,6 +122,10 @@ public class Main {
         }
     }
 
+    /**
+     * Punto de entrada de la aplicación.
+     * Crea la ventana principal y muestra el menú.
+     */
     public static void main(String[] args) {
 
         Main main = new Main();

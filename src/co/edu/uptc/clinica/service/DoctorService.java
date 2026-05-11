@@ -8,6 +8,9 @@ import co.edu.uptc.clinica.domain.Doctor;
 import co.edu.uptc.clinica.enums.IdentificationTypeEnum;
 import co.edu.uptc.clinica.repository.DoctorRepository;
 
+/**
+ * Controla el registro y la consulta de médicos.
+ */
 public class DoctorService {
 
     private DoctorRepository doctorRepository;
@@ -19,6 +22,11 @@ public class DoctorService {
                 new DoctorRepository();
     }
 
+    /**
+     * Registra un médico usando ventanas de diálogo.
+     *
+     * @return mensaje con el resultado del registro
+     */
     public String registerDoctor() {
         IdentificationTypeEnum[] types =
                 IdentificationTypeEnum.values();
@@ -95,8 +103,11 @@ public class DoctorService {
         return "Error al registrar médico";
     }
 
-    
-    
+    /**
+     * Muestra todos los médicos registrados en un texto simple.
+     *
+     * @return lista de médicos o mensaje si no hay ninguno
+     */
     public String showAllDoctors() {
         ArrayList<Doctor> doctors =
                 doctorRepository.findAll();
@@ -114,6 +125,12 @@ public class DoctorService {
         return message;
     }
 
+    /**
+     * Busca un médico por su id.
+     *
+     * @param idDoctor identificación del médico
+     * @return médico encontrado o null si no existe
+     */
     public Doctor findById(int idDoctor) {
         return doctorRepository.findById(
                 idDoctor);
@@ -122,6 +139,12 @@ public class DoctorService {
     
     
 
+    /**
+     * Verifica si existe un médico con ese id.
+     *
+     * @param medicalId identificación del médico
+     * @return true si el médico ya está registrado
+     */
     public boolean existsById(int medicalId) {
         return doctorRepository.findById(
                 medicalId
@@ -129,6 +152,12 @@ public class DoctorService {
     }
     
 
+    /**
+     * Verifica si un texto contiene solo dígitos.
+     *
+     * @param text texto a validar
+     * @return true si es un número entero válido
+     */
     public boolean isNumeric(String text) {
         if (text == null || text.isEmpty()) {
             return false;

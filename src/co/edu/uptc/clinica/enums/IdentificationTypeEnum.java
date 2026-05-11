@@ -1,5 +1,8 @@
 package co.edu.uptc.clinica.enums;
 
+/**
+ * Tipos de identificación usados en el sistema.
+ */
 public enum IdentificationTypeEnum {
 
 	    CC("Cedula de ciudadania"),
@@ -15,6 +18,11 @@ public enum IdentificationTypeEnum {
 
 	    
 	    
+	    /**
+	     * Devuelve el nombre oficial del tipo de identificación.
+	     *
+	     * @return nombre oficial del tipo de identificación
+	     */
 	    public String getOfficialName() {
 	        return officialName;
 	    }

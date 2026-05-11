@@ -9,6 +9,9 @@ import co.edu.uptc.clinica.enums.IdentificationTypeEnum;
 import co.edu.uptc.clinica.enums.PriorityEnum;
 import co.edu.uptc.clinica.repository.PatientRepository;
 
+/**
+ * Controla el registro y la consulta de pacientes.
+ */
 public class PatientService {
 
     private PatientRepository patientRepository;
@@ -18,6 +21,11 @@ public class PatientService {
                 new PatientRepository();
     }
 
+    /**
+     * Registra un paciente usando ventanas de diálogo.
+     *
+     * @return mensaje con el resultado del registro
+     */
     public String registerPatient() {
         IdentificationTypeEnum[] types =
                 IdentificationTypeEnum.values();
@@ -113,6 +121,11 @@ public class PatientService {
         return "Error al registrar paciente";
     }
 
+    /**
+     * Registra un medicamento en el historial de un paciente.
+     *
+     * @return mensaje con el resultado de la operación
+     */
     public String registerMedication() {
         String idInput =
                 JOptionPane.showInputDialog(
@@ -141,6 +154,11 @@ public class PatientService {
         return "Medicamento agregado";
     }
 
+    /**
+     * Muestra todos los pacientes registrados.
+     *
+     * @return lista de pacientes o mensaje si no hay ninguno
+     */
     public String showAllPatients() {
         ArrayList<Patient> patients =
                 patientRepository.findAll();
@@ -159,23 +177,47 @@ public class PatientService {
         return message;
     }
 
+    /**
+     * Verifica si existe un paciente con ese id.
+     *
+     * @param idPatient identificación del paciente
+     * @return true si el paciente ya está registrado
+     */
     public boolean existsById(int idPatient) {
         return patientRepository.findById(
                 idPatient
         ) != null;
     }
 
+    /**
+     * Verifica si existe un paciente con ese correo.
+     *
+     * @param email correo del paciente
+     * @return true si el correo ya está registrado
+     */
     public boolean existsByEmail(String email) {
         return patientRepository.findByEmail(
                 email
         ) != null;
     }
 
+    /**
+     * Busca un paciente por su id.
+     *
+     * @param idPatient identificación del paciente
+     * @return paciente encontrado o null si no existe
+     */
     public Patient findById(int idPatient) {
         return patientRepository.findById(
                 idPatient);
     }
 
+    /**
+     * Verifica si un texto contiene solo dígitos.
+     *
+     * @param text texto a validar
+     * @return true si es numérico
+     */
     public boolean isNumeric(String text) {
         if (text == null || text.isEmpty()) {
             return false;

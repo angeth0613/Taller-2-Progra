@@ -6,6 +6,9 @@ import co.edu.uptc.clinica.domain.MedicalAppoinmet;
 import co.edu.uptc.clinica.domain.Patient;
 import co.edu.uptc.clinica.repository.MedicalAppoinmetRepository;
 
+/**
+ * Controla el registro y la consulta de citas médicas.
+ */
 public class MedicalAppoinmetService {
 
     private MedicalAppoinmetRepository appoinmetRepository;
@@ -26,6 +29,11 @@ public class MedicalAppoinmetService {
                 new MedicalAppoinmetRepository();
     }
 
+    /**
+     * Registra una cita médica con paciente y médico existentes.
+     *
+     * @return mensaje con el resultado del registro
+     */
     public String registerAppoinmet() {
         String idInput =
                 JOptionPane.showInputDialog(
@@ -93,10 +101,20 @@ public class MedicalAppoinmetService {
         return "Error al registrar cita";
     }
 
+    /**
+     * Devuelve todas las citas médicas registradas.
+     *
+     * @return lista de citas
+     */
     public ArrayList<MedicalAppoinmet> findAll() {
         return appoinmetRepository.findAll();
     }
 
+    /**
+     * Muestra la cola de atención con hora, paciente y médico.
+     *
+     * @return texto con la cola de atención o mensaje si no hay citas
+     */
     public String showAttentionQueue() {
         ArrayList<MedicalAppoinmet> list =
                 appoinmetRepository.findAll();
@@ -120,6 +138,12 @@ public class MedicalAppoinmetService {
         return message;
     }
 
+    /**
+     * Verifica si un texto contiene solo dígitos.
+     *
+     * @param text texto a validar
+     * @return true si es numérico
+     */
     public boolean isNumeric(String text) {
         if (text == null || text.isEmpty()) {
             return false;

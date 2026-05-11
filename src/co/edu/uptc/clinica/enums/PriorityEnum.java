@@ -1,5 +1,8 @@
 package co.edu.uptc.clinica.enums;
 
+/**
+ * Niveles de prioridad para los pacientes.
+ */
 public enum PriorityEnum {
 	    LOW(0),
 	    MEDIUM(1),
@@ -12,11 +15,21 @@ public enum PriorityEnum {
 	        this.value = value;
 	    }
 
+/**
+	     * Devuelve el valor entero de la prioridad.
+	     *
+	     * @return valor numérico de la prioridad
+	     */
 	    public int getValue() {
 	        return value;
 	    }
 
-	    
+	    	
+	    /**
+	     * Devuelve el nombre de la prioridad como texto.
+	     *
+	     * @return nombre de la prioridad
+	     */
 	    public String getDisplayName() {
 	        return this.name();
 	    }
