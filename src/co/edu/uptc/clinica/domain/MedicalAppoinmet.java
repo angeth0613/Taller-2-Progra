@@ -1,36 +1,34 @@
 package co.edu.uptc.clinica.domain;
 
 
-
-
 public class MedicalAppoinmet {
-    private int idMedicalAppointment;
-    private String timeAppointment;
+    private int idMedicalAppoinmet;
+    private String timeAppoinmet;
     private Patient patient;
     private Doctor doctor;
     
-	public MedicalAppoinmet(int idMedicalAppointment, String timeAppointment, Patient patient, Doctor doctor) {
+	public MedicalAppoinmet(int idMedicalAppoinmet, String timeAppoinmet, Patient patient, Doctor doctor) {
 		super();
-		this.idMedicalAppointment = idMedicalAppointment;
-		this.timeAppointment = timeAppointment;
+		this.idMedicalAppoinmet = idMedicalAppoinmet;
+		this.timeAppoinmet = timeAppoinmet;
 		this.patient = patient;
 		this.doctor = doctor;
 	}
 
-	public int getIdMedicalAppointment() {
-		return idMedicalAppointment;
+	public int getIdMedicalAppoinmet() {
+		return idMedicalAppoinmet;
 	}
 
-	public void setIdMedicalAppointment(int idMedicalAppointment) {
-		this.idMedicalAppointment = idMedicalAppointment;
+	public void setIdMedicalAppoinmet(int idMedicalAppoinmet) {
+		this.idMedicalAppoinmet = idMedicalAppoinmet;
 	}
 
-	public String getTimeAppointment() {
-		return timeAppointment;
+	public String getTimeAppoinmet() {
+		return timeAppoinmet;
 	}
 
-	public void setTimeAppointment(String timeAppointment) {
-		this.timeAppointment = timeAppointment;
+	public void setTimeAppoinmet(String timeAppoinmet) {
+		this.timeAppoinmet = timeAppoinmet;
 	}
 
 	public Patient getPatient() {
@@ -51,7 +49,7 @@ public class MedicalAppoinmet {
 
 	@Override
 	public String toString() {
-		return "MedicalAppoinmet [idMedicalAppointment=" + idMedicalAppointment + ", timeAppointment=" + timeAppointment
+		return "MedicalAppoinmet [idMedicalAppoinmet=" + idMedicalAppoinmet + ", timeAppointment=" + timeAppoinmet
 				+ ", patient=" + patient + ", doctor=" + doctor + "]";
 	}
     
