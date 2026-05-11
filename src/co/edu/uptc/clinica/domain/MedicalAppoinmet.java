@@ -1,10 +1,12 @@
 package co.edu.uptc.clinica.domain;
 
+/** 
+ * <b>Descripción: </b> Representa una cita médica.
+ *  Contiene hora, paciente y médico asignado. <br>
+ * 
+ * @author angelica beltran
+*/
 
-/**
- * Representa una cita médica.
- * Contiene hora, paciente y médico asignado.
- */
 public class MedicalAppoinmet {
     private int idMedicalAppoinmet;
     private String timeAppoinmet;

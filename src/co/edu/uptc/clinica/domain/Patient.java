@@ -5,10 +5,14 @@ import java.util.ArrayList;
 import co.edu.uptc.clinica.enums.IdentificationTypeEnum;
 import co.edu.uptc.clinica.enums.PriorityEnum;
 
-/**
- * Representa un paciente de la clínica.
- * Guarda información personal, correo, medicamentos y prioridad.
- */
+/** 
+ * <b>Descripción: </b> Representa un paciente de la clínica
+ * Guarda información personal, correo, medicamentos y prioridad. <br>
+ * 
+ * @author angelica beltran
+*/
+
+
 public class Patient {
 
     private IdentificationTypeEnum identificationTypeEnum;
