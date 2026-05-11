@@ -12,8 +12,9 @@ public class DoctorService {
 
     private DoctorRepository doctorRepository;
 
+    
+    
     public DoctorService() {
-
         doctorRepository =
                 new DoctorRepository();
     }
@@ -26,7 +27,6 @@ public class DoctorService {
         for (int i = 0; i < types.length; i++) {
             options[i] = types[i].name();
         }
-
         int typeOption =
                 JOptionPane.showOptionDialog(
                         null,
@@ -48,7 +48,8 @@ public class DoctorService {
         if (!isNumeric(idInput)) {
             return "El ID debe ser numérico";
         }
-
+        
+        
         int medicalId =
                 Integer.parseInt(idInput);
         if (existsById(medicalId)) {
@@ -57,21 +58,26 @@ public class DoctorService {
         String firstName =
                 JOptionPane.showInputDialog(
                         "Ingrese nombre");
+        
+        
         String lastName =
                 JOptionPane.showInputDialog(
                         "Ingrese apellido");
+        
         String specialty =
                 JOptionPane.showInputDialog(
                         "Ingrese especialidad");
         String yearsInput =
                 JOptionPane.showInputDialog(
                         "Ingrese experiencia");
+        
         if (!isNumeric(yearsInput)) {
             return "La experiencia debe ser numérica";
         }
+        
+        
         int years =
                 Integer.parseInt(yearsInput);
-
         Doctor doctor =
                 new Doctor(
                         idType,
@@ -89,6 +95,8 @@ public class DoctorService {
         return "Error al registrar médico";
     }
 
+    
+    
     public String showAllDoctors() {
         ArrayList<Doctor> doctors =
                 doctorRepository.findAll();
@@ -103,7 +111,6 @@ public class DoctorService {
                     + doctor.getSpecialty()
                     + "\n";
         }
-
         return message;
     }
 
@@ -111,17 +118,23 @@ public class DoctorService {
         return doctorRepository.findById(
                 idDoctor);
     }
+    
+    
+    
 
     public boolean existsById(int medicalId) {
         return doctorRepository.findById(
                 medicalId
         ) != null;
     }
+    
 
     public boolean isNumeric(String text) {
         if (text == null || text.isEmpty()) {
             return false;
         }
+        
+        
         for (int i = 0; i < text.length(); i++) {
             if (!Character.isDigit(
                     text.charAt(i))) {

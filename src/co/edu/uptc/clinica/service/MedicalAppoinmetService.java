@@ -18,88 +18,62 @@ public class MedicalAppoinmetService {
     public MedicalAppoinmetService(
             PatientService patientService,
             DoctorService doctorService) {
-
         this.patientService =
                 patientService;
-
         this.doctorService =
                 doctorService;
-
         appoinmetRepository =
                 new MedicalAppoinmetRepository();
     }
 
     public String registerAppoinmet() {
-
         String idInput =
                 JOptionPane.showInputDialog(
-                        "Ingrese ID de la cita"
-                );
-
+                        "Ingrese ID de la cita");
         if (!isNumeric(idInput)) {
-
             JOptionPane.showMessageDialog(null, "el ID debe ser numerico");
-            registerAppoinmet();
-            
+            registerAppoinmet();  
         }
 
         int idAppoinmet =
                 Integer.parseInt(idInput);
-
         if (appoinmetRepository.findById(idAppoinmet)
                 != null) {
-
             return "La cita ya existe";
         }
 
         String time =
                 JOptionPane.showInputDialog(
-                        "Ingrese hora"
-                );
-
+                        "Ingrese hora");
         String patientInput =
                 JOptionPane.showInputDialog(
-                        "Ingrese ID del paciente"
-                );
-
+                        "Ingrese ID del paciente");
         if (!isNumeric(patientInput)) {
-
             return "El ID del paciente debe ser numérico";
         }
 
         int idPatient =
                 Integer.parseInt(patientInput);
-
         Patient patient =
                 patientService.findById(
-                        idPatient
-                );
-
+                        idPatient);
         if (patient == null) {
-
             return "Paciente no encontrado";
         }
 
         String doctorInput =
                 JOptionPane.showInputDialog(
-                        "Ingrese ID del médico"
-                );
-
+                        "Ingrese ID del médico");
         if (!isNumeric(doctorInput)) {
-
             return "El ID del médico debe ser numérico";
         }
 
         int idDoctor =
                 Integer.parseInt(doctorInput);
-
         Doctor doctor =
                 doctorService.findById(
-                        idDoctor
-                );
-
+                        idDoctor);
         if (doctor == null) {
-
             return "Médico no encontrado";
         }
 
@@ -108,77 +82,55 @@ public class MedicalAppoinmetService {
                         idAppoinmet,
                         time,
                         patient,
-                        doctor
-                );
-
+                        doctor);
         boolean result =
                 appoinmetRepository.addAppoinmet(
-                        appoinmet
-                );
+                        appoinmet);
 
         if (result) {
-
             return "Cita registrada";
         }
-
         return "Error al registrar cita";
     }
 
     public ArrayList<MedicalAppoinmet> findAll() {
-
         return appoinmetRepository.findAll();
     }
 
     public String showAttentionQueue() {
-
         ArrayList<MedicalAppoinmet> list =
                 appoinmetRepository.findAll();
-
         if (list.isEmpty()) {
-
             return "No hay citas registradas";
         }
 
         String message = "";
-
         for (MedicalAppoinmet appoinmet : list) {
-
             message +=
                     "Hora: "
                     + appoinmet.getTimeAppoinmet()
-
                     + " | Paciente: "
-
                     + appoinmet.getPatient()
                     .getFirstName()
-
                     + " | Médico: "
-
                     + appoinmet.getDoctor()
                     .getFirstName()
-
                     + "\n";
         }
-
         return message;
     }
 
     public boolean isNumeric(String text) {
-
         if (text == null || text.isEmpty()) {
-
             return false;
         }
 
         for (int i = 0; i < text.length(); i++) {
-
             if (!Character.isDigit(
                     text.charAt(i))) {
-
                 return false;
             }
         }
-
         return true;
     }
 }

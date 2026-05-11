@@ -21,104 +21,66 @@ public class Main {
         appoinmetService =
                 new MedicalAppoinmetService(
                         patientService,
-                        doctorService
-                );
+                        doctorService);
     }
 
     public void showMainMenu() {
-
         boolean running = true;
-
         while (running) {
-
             String option =
                     JOptionPane.showInputDialog(
                             null,
 
                             "CLÍNICA EL LAGUITO\n\n"
-
                             + "1. Registrar Paciente\n"
-
                             + "2. Registrar Médico\n"
-
                             + "3. Registrar Cita\n"
-
                             + "4. Agregar Medicamento\n"
-
                             + "5. Ver Cola de Atención\n"
-
                             + "6. Ver Médicos\n"
-
                             + "7. Ver Pacientes\n"
-
                             + "8. Salir\n\n"
-
-                            + "Seleccione una opción:"
-                    );
+                            + "Seleccione una opción:");
 
             if (option == null) {
                 return;
             }
-
             switch (option) {
-
                 case "1":
-
                     JOptionPane.showMessageDialog(
                             null,
-
-                            patientService.registerPatient()
-                    );
-
+                            patientService.registerPatient());
                     break;
-
                 case "2":
-
                     JOptionPane.showMessageDialog(
                             null,
-
-                            doctorService.registerDoctor()
-                    );
-
+                            doctorService.registerDoctor());
                     break;
 
                 case "3":
-
                     JOptionPane.showMessageDialog(
                             null,
-
-                            appoinmetService.registerAppoinmet()
-                    );
-
+                            appoinmetService.registerAppoinmet());
                     break;
 
                 case "4":
-
                     JOptionPane.showMessageDialog(
                             null,
-
-                            patientService.registerMedication()
-                    );
-
+                            patientService.registerMedication());
                     break;
 
                 case "5":
-
                     JOptionPane.showMessageDialog(
                             null,
-
-                            appoinmetService.showAttentionQueue()
-                    );
+                            appoinmetService.showAttentionQueue());
 
                     break;
 
                 case "6":
-
                     JOptionPane.showMessageDialog(
                             null,
 
-                            doctorService.showAllDoctors()
-                    );
+                            doctorService.showAllDoctors());
 
                     break;
 
@@ -127,18 +89,16 @@ public class Main {
                     JOptionPane.showMessageDialog(
                             null,
 
-                            patientService.showAllPatients()
-                    );
-
+                            patientService.showAllPatients());
                     break;
 
                 case "8":
 
-                    JOptionPane.showMessageDialog(
+                    
+                	JOptionPane.showMessageDialog(
                             null,
 
-                            "Gracias por usar el sistema"
-                    );
+                            "Gracias por ingresar al sistema, que tengas un buen dia");
 
                     running = false;
 
@@ -149,8 +109,7 @@ public class Main {
                     JOptionPane.showMessageDialog(
                             null,
 
-                            "Opción inválida"
-                    );
+                            "Opción inválida");
             }
         }
     }
