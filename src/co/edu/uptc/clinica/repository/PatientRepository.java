@@ -1,51 +1,44 @@
 package co.edu.uptc.clinica.repository;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
 
 import co.edu.uptc.clinica.domain.Patient;
 
 public class PatientRepository {
 
-    private Set<Patient> patients;
+    private ArrayList<Patient> patients;
 
     public PatientRepository() {
-        this.patients = new HashSet<>();
+        patients = new ArrayList<>();
     }
 
     public boolean addPatient(Patient patient) {
-        return this.patients.add(patient);
+        return patients.add(patient);
     }
 
-    public Set<Patient> findAll() {
-        return this.patients;
+    public ArrayList<Patient> findAll() {
+        return patients;
     }
 
     public Patient findById(int idPatient) {
 
-        return this.patients.stream()
-                .filter(p -> p.getIdPatient() == idPatient)
-                .findFirst()
-                .orElse(null);
+        for (Patient patient : patients) {
+
+            if (patient.getIdPatient() == idPatient) {
+                return patient;
+            }
+        }
+
+        return null;
     }
 
     public Patient findByEmail(String email) {
+		return null;
 
-        return this.patients.stream()
-                .filter(p -> p.getEmail().equalsIgnoreCase(email))
-                .findFirst()
-                .orElse(null);
-    }
+}
 
-    public boolean addMedicationToPatient(int idPatient, String medication) {
-
-        Patient patient = findById(idPatient);
-
-        if (patient != null) {
-
-            return patient.getMedicationHistory().add(medication);
-        }
-
-        return false;
-    }
+	public boolean addMedicationToPatient(int idPatient, String medication) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

@@ -81,6 +81,10 @@ public class Doctor {
 	public void setYearsOfExperience(int yearsOfExperience) {
 		this.yearsOfExperience = yearsOfExperience;
 	}
+	
+	public String getFullName() {
+	    return firstName + " " + lastName;
+	}
 
 
 	@Override

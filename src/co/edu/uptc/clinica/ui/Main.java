@@ -59,7 +59,7 @@ public class Main {
 			switch (choice) {
 				case 0: registerPatient(); break;
 				case 1: registerDoctor(); break;
-				case 2: registerAppointment(); break;
+				case 2: registerAppoinmet(); break;
 				case 3: addMedicationToPatient(); break;
 				case 4: showAttentionQueue(); break;
 				case 5: showDoctorsByExperience(); break;
@@ -122,9 +122,15 @@ public class Main {
 
 		Priority priority = selectPriority();
 		if (priority == null) return;
-
-		Patient patient = new Patient(idType, idPatient,
-				firstName.trim(), lastName.trim(), email.trim(), priority);
+		Patient patient = new Patient(
+		        idType,
+		        idPatient.intValue(),
+		        firstName.trim(),
+		        lastName.trim(),
+		        email.trim(),
+		        new java.util.LinkedHashSet<>(),
+		        priority
+		);
 
 		boolean result = patientService.addPatient(patient);
 
@@ -183,6 +189,7 @@ public class Main {
 		Doctor doctor = new Doctor(idType, medicalId,
 				firstName.trim(), lastName.trim(),
 				specialty.trim(), yearsOfExperience);
+	
 
 		boolean result = doctorService.addDoctor(doctor);
 
@@ -198,7 +205,7 @@ public class Main {
 	}
 
 	
-	private void registerAppointment() {
+	private void registerAppoinmet() {
 		String idInput = JOptionPane.showInputDialog(null,
 				"Ingrese el ID de la cita médica:",
 				"Registrar Cita Médica", JOptionPane.PLAIN_MESSAGE);
@@ -236,7 +243,8 @@ public class Main {
 			return;
 		}
 
-		boolean result = appointmentService.addAppointment(idAppointment, time.trim(), idPatient, idDoctor);
+		int idAppoinmet;
+		boolean result = appoinmetService.addAppoinmet(idAppoinmet, time.trim(), idPatient, idDoctor);
 
 		if (result) {
 			JOptionPane.showMessageDialog(null,
@@ -257,7 +265,7 @@ public class Main {
 		if (idInput == null || idInput.trim().isEmpty()) return;
 		Long idPatient = Long.parseLong(idInput.trim());
 
-		if (!patientService.existsById(idPatient)) {
+		if (!patientService.existsByEmail(idPatient)) {
 			JOptionPane.showMessageDialog(null,
 					"No se encontró ningún paciente con la identificación: " + idPatient,
 					"Paciente No Encontrado", JOptionPane.WARNING_MESSAGE);
@@ -296,9 +304,9 @@ public class Main {
 		for (MedicalAppoinmet appoinmet : queue) {
 			sb.append(position++).append(". ")
 					.append("Hora: ").append(appoinmet.getTimeAppoinmet())
-					.append(" | Paciente: ").append(appoinmet.getPatient().getFullName())
+					.append(" | Paciente: ").append(appoinmet.getPatient().getFirstName())
 					.append(" | Prioridad: ").append(appoinmet.getPatient().getPriority().getDisplayName())
-					.append(" | Médico: ").append(appoinmet.getDoctor().getFullName())
+					.append(" | Médico: ").append(appoinmet.getDoctor().getFirstName())
 					.append("\n");
 		}
 		JOptionPane.showMessageDialog(null, sb.toString(),
@@ -317,7 +325,7 @@ public class Main {
 		int position = 1;
 		for (Doctor doctor : doctors) {
 			sb.append(position++).append(". ")
-					.append(doctor.getFullName())
+					.append(doctor.getFirstName())
 					.append(" | Especialidad: ").append(doctor.getSpecialty())
 					.append(" | Experiencia: ").append(doctor.getYearsOfExperience()).append(" años")
 					.append("\n");
@@ -336,7 +344,7 @@ public class Main {
 		}
 		StringBuilder sb = new StringBuilder("=== LISTADO DE PACIENTES ===\n\n");
 		for (Patient patient : patientService.findAll()) {
-			sb.append("- ").append(patient.getFullName())
+			sb.append("- ").append(patient.getFirstName())
 					.append(" | ").append(patient.getIdentificationType().getOfficialName())
 					.append(": ").append(patient.getIdPatient())
 					.append(" | Email: ").append(patient.getEmail())
@@ -358,7 +366,7 @@ public class Main {
 		}
 		StringBuilder sb = new StringBuilder("=== LISTADO DE MÉDICOS ===\n\n");
 		for (Doctor doctor : doctorService.findAll()) {
-			sb.append("- ").append(doctor.getFullName())
+			sb.append("- ").append(doctor.getFirstName())
 					.append(" | ").append(doctor.getIdentificationType().getOfficialName())
 					.append(": ").append(doctor.getMedicalId())
 					.append(" | Especialidad: ").append(doctor.getSpecialty())

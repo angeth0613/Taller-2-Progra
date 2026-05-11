@@ -1,89 +1,57 @@
 package co.edu.uptc.clinica.service;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+
 import co.edu.uptc.clinica.domain.Patient;
 import co.edu.uptc.clinica.repository.PatientRepository;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
-
 public class PatientService {
 
-	
-	private PatientRepository patientRepository;
+    private PatientRepository patientRepository;
 
-	
-	public PatientService() {
-		this.patientRepository = new PatientRepository();
-	}
+    public PatientService() {
+        patientRepository = new PatientRepository();
+    }
 
-	
-	private boolean validate(Patient patient) {
-		if (Objects.isNull(patient.getFirstName()) || patient.getFirstName().trim().isEmpty()) {
-			return false;
-		}
-		if (Objects.isNull(patient.getLastName()) || patient.getLastName().trim().isEmpty()) {
-			return false;
-		}
-		if (Objects.isNull(patient.getEmail()) || patient.getEmail().trim().isEmpty()) {
-			return false;
-		}
-		if (Objects.isNull(patient.getIdentificationType())) {
-			return false;
-		}
-		if (Objects.isNull(patient.getIdPatient()) || patient.getIdPatient() <= 0) {
-			return false;
-		}
-		return true;
-	}
+    public boolean addPatient(Patient patient) {
 
-	
-	public boolean existsById(int i) {
-		return !Objects.isNull(patientRepository.findById(i));
-	}
+        if (patientRepository.findById(patient.getIdPatient()) != null) {
+            return false;
+        }
 
-	
-	public boolean existsByEmail(String email) {
-		return !Objects.isNull(patientRepository.findByEmail(email));
-	}
+        if (patientRepository.findByEmail(patient.getEmail()) != null) {
+            return false;
+        }
 
-	
-	public boolean addPatient(Patient patient) {
-		if (!validate(patient)) {
-			return false;
-		}
-		if (existsById(patient.getIdPatient())) {
-			return false;
-		}
-		if (existsByEmail(patient.getEmail())) {
-			return false;
-		}
-		return this.patientRepository.addPatient(patient);
-	}
+        return patientRepository.addPatient(patient);
+    }
 
-	public Set<Patient> findAll() {
-		return this.patientRepository.findAll();
-	}
+    public ArrayList<Patient> findAll() {
+        return patientRepository.findAll();
+    }
 
-	
-	public Patient findById(Long idPatient) {
-		return this.patientRepository.findById(idPatient);
-	}
+    public Patient findById(int idPatient) {
+        return patientRepository.findById(idPatient);
+    }
 
-	
-	public boolean addMedication(Long idPatient, String medication) {
-		if (Objects.isNull(patientRepository.findById(idPatient))) {
-			return false;
-		}
-		return this.patientRepository.addMedicationToPatient(idPatient, medication);
-	}
+    public boolean addMedication(int idPatient, String medication) {
+        return patientRepository.addMedicationToPatient(idPatient, medication);
+    }
 
+    public ArrayList<Patient> findAllOrderedByPriority() {
 
-	public List<Patient> findAllOrderedByPriority() {
-		List<Patient> list = new ArrayList<>(this.patientRepository.findAll());
-		list.sort(Comparator.comparingInt(p -> -p.getPriority().getValue()));
-		return list;
-	}
+        ArrayList<Patient> patients = patientRepository.findAll();
+
+        Collections.sort(patients, new Comparator<Patient>() {
+
+            @Override
+            public int compare(Patient p1, Patient p2) {
+                return p2.getPriority().getValue() - p1.getPriority().getValue();
+            }
+        });
+
+        return patients;
+    }
 }
