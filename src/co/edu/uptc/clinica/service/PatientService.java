@@ -48,10 +48,22 @@ public class PatientService {
 
             @Override
             public int compare(Patient p1, Patient p2) {
-                return p2.getPriority().getValue() - p1.getPriority().getValue();
+
+                return p2.getPriorityEnum().getValue()
+                        - p1.getPriorityEnum().getValue();
             }
         });
 
         return patients;
+    }
+
+    public boolean existsByEmail(String email) {
+
+        return patientRepository.findByEmail(email) != null;
+    }
+
+    public boolean existsById(int idPatient) {
+
+        return patientRepository.findById(idPatient) != null;
     }
 }

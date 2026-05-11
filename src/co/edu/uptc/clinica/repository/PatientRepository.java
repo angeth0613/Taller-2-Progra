@@ -33,12 +33,28 @@ public class PatientRepository {
     }
 
     public Patient findByEmail(String email) {
-		return null;
 
-}
+        for (Patient patient : patients) {
 
-	public boolean addMedicationToPatient(int idPatient, String medication) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+            if (patient.getEmail().equals(email)) {
+                return patient;
+            }
+        }
+
+        return null;
+    }
+
+    public boolean addMedicationToPatient(int idPatient,
+                                          String medication) {
+
+        Patient patient = findById(idPatient);
+
+        if (patient == null) {
+            return false;
+        }
+
+        patient.getMedicationHistory().add(medication);
+
+        return true;
+    }
 }
