@@ -31,8 +31,84 @@ public class Patient {
         this.medicationHistory = medicationHistory;
         this.priority = priority;
     }
+    
+    
+    
+    
 
-    public String getFullName() {
+    public String getFirstName() {
+		return firstName;
+	}
+
+
+
+
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+
+
+
+
+	public String getLastName() {
+		return lastName;
+	}
+
+
+
+
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+
+
+
+
+	public void setIdentificationType(IdentificationType identificationType) {
+		this.identificationType = identificationType;
+	}
+
+
+
+
+
+	public void setIdPatient(int idPatient) {
+		this.idPatient = idPatient;
+	}
+
+
+
+
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+
+
+
+
+	public void setMedicationHistory(ArrayList<String> medicationHistory) {
+		this.medicationHistory = medicationHistory;
+	}
+
+
+
+
+
+	public void setPriority(Priority priority) {
+		this.priority = priority;
+	}
+
+
+
+
+
+	public String getFullName() {
         return firstName + " " + lastName;
     }
 
