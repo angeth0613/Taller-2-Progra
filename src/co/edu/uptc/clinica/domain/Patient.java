@@ -2,34 +2,34 @@ package co.edu.uptc.clinica.domain;
 
 import java.util.ArrayList;
 
-import co.edu.uptc.clinica.enums.IdentificationType;
-import co.edu.uptc.clinica.enums.Priority;
+import co.edu.uptc.clinica.enums.IdentificationTypeEnum;
+import co.edu.uptc.clinica.enums.PriorityEnum;
 
 public class Patient {
 
-    private IdentificationType identificationType;
+    private IdentificationTypeEnum identificationTypeEnum;
     private int idPatient;
     private String firstName;
     private String lastName;
     private String email;
     private ArrayList<String> medicationHistory;
-    private Priority priority;
+    private PriorityEnum priorityEnum;
 
-    public Patient(IdentificationType identificationType,
+    public Patient(IdentificationTypeEnum identificationTypeEnum,
                    int idPatient,
                    String firstName,
                    String lastName,
                    String email,
                    ArrayList<String> medicationHistory,
-                   Priority priority) {
+                   PriorityEnum priorityEnum) {
 
-        this.identificationType = identificationType;
+        this.identificationTypeEnum = identificationTypeEnum;
         this.idPatient = idPatient;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.medicationHistory = medicationHistory;
-        this.priority = priority;
+        this.priorityEnum = priorityEnum;
     }
     
     
@@ -68,8 +68,8 @@ public class Patient {
 
 
 
-	public void setIdentificationType(IdentificationType identificationType) {
-		this.identificationType = identificationType;
+	public void setIdentificationTypeEnum(IdentificationTypeEnum identificationTypeEnum) {
+		this.identificationTypeEnum = identificationTypeEnum;
 	}
 
 
@@ -100,8 +100,8 @@ public class Patient {
 
 
 
-	public void setPriority(Priority priority) {
-		this.priority = priority;
+	public void setPriority(PriorityEnum priorityEnum) {
+		this.priorityEnum = priorityEnum;
 	}
 
 
@@ -112,8 +112,8 @@ public class Patient {
         return firstName + " " + lastName;
     }
 
-    public IdentificationType getIdentificationType() {
-        return identificationType;
+    public IdentificationTypeEnum getIdentificationTypeEnum() {
+        return identificationTypeEnum;
     }
 
     public int getIdPatient() {
@@ -128,7 +128,18 @@ public class Patient {
         return medicationHistory;
     }
 
-    public Priority getPriority() {
-        return priority;
+    public PriorityEnum getPriorityEnum() {
+        return priorityEnum;
     }
+
+
+
+
+
+	@Override
+	public String toString() {
+		return "Patient [identificationTypeEnum=" + identificationTypeEnum + ", idPatient=" + idPatient + ", firstName="
+				+ firstName + ", lastName=" + lastName + ", email=" + email + ", medicationHistory=" + medicationHistory
+				+ ", priorityEnum=" + priorityEnum + "]";
+	}
 }

@@ -1,9 +1,9 @@
 package co.edu.uptc.clinica.domain;
 
-import co.edu.uptc.clinica.enums.IdentificationType;
+import co.edu.uptc.clinica.enums.IdentificationTypeEnum;
 
 public class Doctor {
-    private IdentificationType identificationType;
+    private IdentificationTypeEnum identificationTypeEnum;
     private int medicalId;
     private String firstName;
     private String lastName;
@@ -11,10 +11,12 @@ public class Doctor {
     private int yearsOfExperience;
     
     
-	public Doctor(IdentificationType identificationType, int medicalId, String firstName, String lastName,
+    
+    
+	public Doctor(IdentificationTypeEnum identificationTypeEnum, int medicalId, String firstName, String lastName,
 			String specialty, int yearsOfExperience) {
 		super();
-		this.identificationType = identificationType;
+		this.identificationTypeEnum = identificationTypeEnum;
 		this.medicalId = medicalId;
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -23,14 +25,15 @@ public class Doctor {
 	}
 
 
-	public IdentificationType getIdentificationType() {
-		return identificationType;
+	public IdentificationTypeEnum getIdentificationTypeEnum() {
+		return identificationTypeEnum;
 	}
 
 
-	public void setIdentificationType(IdentificationType identificationType) {
-		this.identificationType = identificationType;
+	public void setIdentificationType(IdentificationTypeEnum identificationTypeEnum) {
+		this.identificationTypeEnum = identificationTypeEnum;
 	}
+
 
 
 	public int getMedicalId() {
@@ -81,15 +84,11 @@ public class Doctor {
 	public void setYearsOfExperience(int yearsOfExperience) {
 		this.yearsOfExperience = yearsOfExperience;
 	}
-	
-	public String getFullName() {
-	    return firstName + " " + lastName;
-	}
 
 
 	@Override
 	public String toString() {
-		return "Doctor [identificationType=" + identificationType + ", medicalId=" + medicalId + ", firstName="
+		return "Doctor [identificationTypeEnum=" + identificationTypeEnum + ", medicalId=" + medicalId + ", firstName="
 				+ firstName + ", lastName=" + lastName + ", specialty=" + specialty + ", yearsOfExperience="
 				+ yearsOfExperience + "]";
 	}
