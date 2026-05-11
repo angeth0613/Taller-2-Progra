@@ -1,5 +1,7 @@
 package co.edu.uptc.clinica.domain;
 
+import java.util.Set;
+
 import co.edu.uptc.clinica.enums.IdentificationType;
 import co.edu.uptc.clinica.enums.Priority;
 
@@ -9,14 +11,14 @@ public class Patient {
     protected String firstName;
     protected String lastName;
     protected String email;
-    protected String medicationHistory;
+    protected Set<String> medicationHistory;
     protected Priority priority;
     
     
     
     
 	public Patient(IdentificationType identificationType, int idPatient, String firstName, String lastName,
-			String email, String medicationHistory, Priority priority) {
+			String email, Set<String> medicationHistory, Priority priority) {
 		super();
 		this.identificationType = identificationType;
 		this.idPatient = idPatient;
@@ -100,14 +102,14 @@ public class Patient {
 
 
 
-	public String getMedicationHistory() {
+	public Set<String> getMedicationHistory() {
 		return medicationHistory;
 	}
 
 
 
 
-	public void setMedicationHistory(String medicationHistory) {
+	public void setMedicationHistory(Set<String> medicationHistory) {
 		this.medicationHistory = medicationHistory;
 	}
 

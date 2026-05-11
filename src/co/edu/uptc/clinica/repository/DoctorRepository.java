@@ -1,33 +1,30 @@
 package co.edu.uptc.clinica.repository;
 
-import co.edu.uptc.clinica.domain.Doctor;
-
 import java.util.HashSet;
 import java.util.Set;
 
+import co.edu.uptc.clinica.domain.Doctor;
 
 public class DoctorRepository {
 
-	private Set<Doctor> doctors;
+    private Set<Doctor> doctors;
 
-	public DoctorRepository() {
-		this.doctors = new HashSet<>();
-	}
+    public DoctorRepository() {
+        doctors = new HashSet<>();
+    }
 
+    public boolean addDoctor(Doctor doctor) {
+        return doctors.add(doctor);
+    }
 
-	public boolean addDoctor(Doctor doctor) {
-		return this.doctors.add(doctor);
-	}
+    public Set<Doctor> findAll() {
+        return doctors;
+    }
 
-	
-	public Set<Doctor> findAll() {
-		return this.doctors;
-	}
-
-	
-	public Doctor findById(Long medicalId) {
-		return this.doctors.stream()
-				.filter(d -> d.getMedicalId().equals(medicalId))
-				.findFirst().orElse(null);
-	}
+    public Doctor findById(int medicalId) {
+        return doctors.stream()
+                .filter(d -> d.getMedicalId() == medicalId)
+                .findFirst()
+                .orElse(null);
+    }
 }

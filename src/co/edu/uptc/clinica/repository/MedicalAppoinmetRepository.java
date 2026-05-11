@@ -1,31 +1,31 @@
 package co.edu.uptc.clinica.repository;
-import co.edu.uptc.clinica.domain.MedicalAppoinmet;
+
 import java.util.HashSet;
 import java.util.Set;
 
+import co.edu.uptc.clinica.domain.MedicalAppoinmet;
+
 public class MedicalAppoinmetRepository {
 
-	
-	private Set<MedicalAppoinmet> appoinmets;
+    private Set<MedicalAppoinmet> appointments;
 
+    public MedicalAppoinmetRepository() {
+        appointments = new HashSet<>();
+    }
 
-	public MedicalAppoinmetRepository() {
-		this.appoinmets = new HashSet<>();
-	}
+    public boolean addAppoinmet(MedicalAppoinmet appoinmet) {
+        return appointments.add(appoinmet);
+    }
 
-	public boolean addAppoinmet(MedicalAppoinmet appoinmet) {
-		return this.appoinmets.add(appoinmet);
-	}
+    public Set<MedicalAppoinmet> findAll() {
+        return appointments;
+    }
 
-	
-	public Set<MedicalAppoinmet> findAll() {
-		return this.appoinmets;
-	}
+    public MedicalAppoinmet findById(int id) {
 
-	
-	public MedicalAppoinmet findById(int idAppoinmet) {
-		return this.appoinmets.stream()
-				.filter(a -> a.getIdMedicalAppoinmet().equals(idAppoinmet))
-				.findFirst().orElse(null);
-	}
+        return appointments.stream()
+                .filter(a -> a.getIdMedicalAppoinmet() == id)
+                .findFirst()
+                .orElse(null);
+    }
 }
