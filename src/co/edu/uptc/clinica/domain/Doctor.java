@@ -5,7 +5,8 @@ import co.edu.uptc.clinica.enums.IdentificationTypeEnum;
  * <b>Descripción: </b> Representa un médico en la clínica.
  * Contiene datos de identificación, especialidad y experiencia. <br>
  * 
- * @author angelica beltran
+ * @author Angélica Beltrán
+ * {@code 202520199}
 */
 
 

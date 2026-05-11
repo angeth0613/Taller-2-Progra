@@ -4,8 +4,8 @@ package co.edu.uptc.clinica.domain;
  * <b>Descripción: </b> Representa una cita médica.
  *  Contiene hora, paciente y médico asignado. <br>
  * 
- * @author angelica beltran
-*/
+ * @author Angélica Beltrán
+ * {@code 202520199}*/
 
 public class MedicalAppoinmet {
     private int idMedicalAppoinmet;

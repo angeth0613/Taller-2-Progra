@@ -9,7 +9,8 @@ import co.edu.uptc.clinica.enums.PriorityEnum;
  * <b>Descripción: </b> Representa un paciente de la clínica
  * Guarda información personal, correo, medicamentos y prioridad. <br>
  * 
- * @author angelica beltran
+ * @author Angélica Beltrán
+ * {@code 202520199}
 */
 
 
