@@ -2,20 +2,18 @@ package co.edu.uptc.clinica.enums;
 
 public enum IdentificationType {
 
-    CC("Cédula de ciudadanía"),
+    CC("Cedula de ciudadania"),
     TI("Tarjeta de identidad"),
-    CE("Cédula de extranjería"),
+    CE("Cedula de extranjeria"),
     PA("Pasaporte");
 
-    private String nombre;
+    private String officialName;
 
-    IdentificationType(String nombre) {
-        this.nombre = nombre;
+    IdentificationType(String officialName) {
+        this.officialName = officialName;
     }
-    
-    
 
     public String getOfficialName() {
-        return nombre;
+        return officialName;
     }
 }

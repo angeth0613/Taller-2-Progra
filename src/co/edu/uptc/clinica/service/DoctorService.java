@@ -27,4 +27,11 @@ public class DoctorService {
     public DoctorRepository findAll() {
         return doctorRepository;
     }
-}
+
+	
+
+	public Doctor findById(int idDoctor) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
