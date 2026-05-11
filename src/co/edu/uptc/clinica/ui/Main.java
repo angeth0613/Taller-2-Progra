@@ -35,61 +35,70 @@ public class Main {
 
         while (running) {
 
-            String[] options = {
-                    "Registrar Paciente",
-                    "Registrar Médico",
-                    "Registrar Cita",
-                    "Agregar Medicamento",
-                    "Ver Cola Atención",
-                    "Ver Médicos",
-                    "Ver Pacientes",
-                    "Salir"
-            };
-
-            int option = JOptionPane.showOptionDialog(
+            String option = JOptionPane.showInputDialog(
                     null,
-                    "Clínica El Laguito",
-                    "Menú",
-                    JOptionPane.DEFAULT_OPTION,
-                    JOptionPane.PLAIN_MESSAGE,
-                    null,
-                    options,
-                    options[0]
+                    " CLÍNICA EL LAGUITO \n\n"
+                    + "1. Registrar Paciente\n"
+                    + "2. Registrar Médico\n"
+                    + "3. Registrar Cita\n"
+                    + "4. Agregar Medicamento\n"
+                    + "5. Ver fila de Atención\n"
+                    + "6. Ver Médicos\n"
+                    + "7. Ver Pacientes\n"
+                    + "8. Salir\n\n"
+                    + "seleccione lo que desea realizar:"
             );
+
+            if (option == null) {
+                return;
+            }
 
             switch (option) {
 
-                case 0:
+                case "1":
                     registerPatient();
                     break;
 
-                case 1:
+                case "2":
                     registerDoctor();
                     break;
 
-                case 2:
+                case "3":
                     registerAppoinmet();
                     break;
 
-                case 3:
+                case "4":
                     addMedicationToPatient();
                     break;
 
-                case 4:
+                case "5":
                     showAttentionQueue();
                     break;
 
-                case 5:
+                case "6":
                     showAllDoctors();
                     break;
 
-                case 6:
+                case "7":
                     showAllPatients();
                     break;
 
-                default:
+                case "8":
+
+                    JOptionPane.showMessageDialog(
+                            null,
+                            "Gracias por ingresar al sistema, tenga un muy buen dia"
+                    );
+
                     running = false;
                     break;
+
+                default:
+
+                    JOptionPane.showMessageDialog(
+                            null,
+                            "Opción inválida, seleccione nuevamente"
+                    );
             }
         }
     }
@@ -262,7 +271,7 @@ public class Main {
                 JOptionPane.showInputDialog(
                         "Ingrese ID de la cita"
                 );
-
+        
         int idAppoinmet =
                 Integer.parseInt(idInput);
 
@@ -508,4 +517,5 @@ public class Main {
         Main main = new Main();
         main.showMainMenu();
     }
+    
 }
